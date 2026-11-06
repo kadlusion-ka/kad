@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kadlusion - Central de Projetos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .container {
+            max-width: 800px;
+            margin: -30px auto 40px auto;
+            padding: 0 15px;
+            flex: 1;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        .card h2 {
+            color: #1e3c72;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        .feature-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 1.05rem;
+        }
+        .feature-list li::before {
+            content: "✔ ";
+            color: #2a5298;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        /* Vitrines em paisagem (3 colunas para apps) */
+        .landscape-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        /* Vitrine em paisagem (2 colunas para o livro) */
+        .book-showcase {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .landscape-showcase div, .book-showcase div {
+            overflow: hidden;
+            border-radius: 8px;
+            border: 2px solid #cbd5e1;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            background: #111;
+        }
+        .landscape-showcase div:hover, .book-showcase div:hover {
+            transform: translateY(-4px);
+            border-color: #2a5298;
+        }
+        .landscape-showcase img, .book-showcase img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            display: block;
+        }
+        /* Vitrine escura do Player */
+        .player-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        .player-showcase div {
+            overflow: hidden;
+            border-radius: 10px;
+            border: 2px solid #444;
+            cursor: pointer;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .player-showcase div:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: #00bcd4;
+            box-shadow: 0 10px 25px rgba(0,188,212,0.3);
+        }
+        .player-showcase img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            display: block;
+        }
+        .pricing-box {
+            background: #eef2f7;
+            border: 2px solid #d0dbe5;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .pricing-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+        @media (max-width: 768px) {
+            .landscape-showcase, .book-showcase, .player-showcase, .pricing-grid-3 {
+                grid-template-columns: 1fr;
+            }
+            .player-showcase img, .landscape-showcase img, .book-showcase img {
+                height: 300px;
+            }
+        }
+        .price-option {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #cbd5e1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .price-title {
+            font-size: 1.05rem;
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 5px;
+        }
+        .price-value {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2a5298;
+            margin-bottom: 10px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #2a5298;
+            color: white;
+            padding: 10px 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s;
+            margin-top: auto;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        .btn:hover {
+            background-color: #1e3c72;
+        }
+        
+        /* Modal Lightbox */
+        #lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        #lightbox-modal img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+            object-fit: contain;
+        }
+        #lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(0,0,0,0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.2s;
+        }
+        #lightbox-close:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #333;
+            color: white;
+            font-size: 0.95rem;
+        }
+        footer a {
+            color: #4da3ff;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Kadlusion</h1>
+        <p>Inovação, Tecnologia e Arte na Palma da Sua Mão</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- PROJETO 1: APP DE COMPRAS -->
+        <div class="card">
+            <h2>🛒 App de Compras com Voz</h2>
+            <p>Esqueça o papel e a caneta no supermercado. Adicione itens e preços por comando de voz, calcule o total em tempo real, use a digitação manual de segurança e gerencie seu histórico de compras.</p>
+            
+            <ul class="feature-list">
+                <li>Controle total por comando de voz</li>
+                <li>Modo de digitação manual integrado</li>
+                <li>Confirmação de segurança contra cliques acidentais</li>
+                <li>Temas personalizados e calculadora rápida</li>
+            </ul>
+
+            <div class="landscape-showcase">
+                <div onclick="openLightbox('compras1.jpg')">
+                    <img src="compras1.jpg" alt="Tela Principal - Compra com Voz">
+                </div>
+                <div onclick="openLightbox('compras2.jpg')">
+                    <img src="compras2.jpg" alt="Calculadora Integrada - Compra com Voz">
+                </div>
+                <div onclick="openLightbox('compras3.jpg')">
+                    <img src="compras3.jpg" alt="Modo Escuro - Compra com Voz">
+                </div>
+            </div>
+
+            <div class="pricing-box">
+                <h3>Escolha o seu plano de acesso</h3>
+                
+                <div class="pricing-grid-3">
+                    <div class="price-option">
+                        <div class="price-title">Plano Mensal</div>
+                        <div class="price-value">R$ 10,00</div>
+                        <a href="https://mpago.la/1JLvNVk" class="btn" target="_blank">Assinar Mensal</a>
+                    </div>
+                    <div class="price-option">
+                        <div class="price-title">Plano Anual</div>
+                        <div class="price-value">R$ 40,00</div>
+                        <a href="https://mpago.la/2byh7FF" class="btn" target="_blank">Assinar Anual</a>
+                    </div>
+                    <div class="price-option">
+                        <div class="price-title">Vitalício</div>
+                        <div class="price-value">R$ 40,00*</div>
+                        <a href="https://mpago.la/1KcWXsX" class="btn" target="_blank">Comprar Vitalício</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJETO 2: MUSIC PLAYER -->
+        <div class="card">
+            <h2>🎵 SuperPlayer (Leitor de Música Android)</h2>
+            <p>Um tocador de áudio moderno desenvolvido para Android, com persistência nativa de listas em JSON, equalizador customizado, pulo de faixas pelos botões de volume e controles completos na tela de bloqueio.</p>
+            
+            <ul class="feature-list">
+                <li>Listas de reprodução nativas em JSON</li>
+                <li>Equalizador de som personalizado</li>
+                <li>Atalho de troca de faixa pelos botões de volume</li>
+                <li>Controles de mídia na tela de bloqueio</li>
+            </ul>
+
+            <div class="player-showcase">
+                <div onclick="openLightbox('player1.jpg')">
+                    <img src="player1.jpg" alt="SuperPlayer - Interface Principal">
+                </div>
+                <div onclick="openLightbox('player2.jpg')">
+                    <img src="player2.jpg" alt="SuperPlayer - Visualizador de Áudio">
+                </div>
+                <div onclick="openLightbox('player3.jpg')">
+                    <img src="player3.jpg" alt="SuperPlayer - Visual de Vinil">
+                </div>
+            </div>
+
+            <div class="pricing-box">
+                <h3>Escolha o seu plano de acesso</h3>
+
+                <div class="pricing-grid-3">
+                    <div class="price-option">
+                        <div class="price-title">Plano Mensal</div>
+                        <div class="price-value">R$ 8,00</div>
+                        <a href="https://mpago.la/1vVxB8j" class="btn" target="_blank">Assinar Mensal</a>
+                    </div>
+                    <div class="price-option">
+                        <div class="price-title">Plano Anual</div>
+                        <div class="price-value">R$ 35,00</div>
+                        <a href="https://mpago.la/1FbT4Kq" class="btn" target="_blank">Assinar Anual</a>
+                    </div>
+                    <div class="price-option">
+                        <div class="price-title">Vitalício</div>
+                        <div class="price-value">R$ 40,00</div>
+                        <a href="https://mpago.la/1YoiVgD" class="btn" target="_blank">Comprar Vitalício</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJETO 3: LIVRO -->
+        <div class="card">
+            <h2>📚 E-book: 2147: O Código do Silício</h2>
+            <p>Uma imersão completa em uma obra de ficção científica instigante. Conheça a história e os mistérios envolvendo a evolução e o futuro da tecnologia sob a tutela de seres supremos[cite: 9, 10].</p>
+            
+            <ul class="feature-list">
+                <li>Formato digital EPUB otimizado</li>
+                <li>Enredo imersivo de ficção científica</li>
+                <li>Disponível para leitura em e-readers e celulares</li>
+            </ul>
+
+            <!-- Vitrine com Capa e Sumário do Livro lado a lado -->
+            <div class="book-showcase">
+                <div onclick="openLightbox('capalivro.png')">
+                    <img src="capalivro.png" alt="Capa - 2147 O Código do Silício">
+                </div>
+                <div onclick="openLightbox('artelivro.png')">
+                    <img src="artelivro.png" alt="Sumário - 2147 O Código do Silício">
+                </div>
+            </div>
+
+            <div class="pricing-box">
+                <h3>Leitura Digital</h3>
+                <div class="price-value" style="font-size: 1.1rem; margin: 10px 0;">E-book Oficial</div>
+                <p>Garanta já o seu exemplar digital.</p>
+                <br>
+                <a href="https://mpago.la/25wLmua" class="btn" target="_blank" style="width: auto; padding: 12px 25px;">Comprar E-book</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal Lightbox para Ampliar Imagens na Mesma Tela -->
+    <div id="lightbox-modal" onclick="closeLightbox()">
+        <span id="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Ampliado">
+    </div>
+
+    <footer>
+        <p>Precisa de suporte ou tem dúvidas? Contacte-nos em: <a href="mailto:Kadlusion@gmail.com">Kadlusion@gmail.com</a></p>
+        <p style="margin-top: 8px; opacity: 0.8;">&copy; 2026 Kadlusion. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function openLightbox(imageSrc) {
+            const modal = document.getElementById('lightbox-modal');
+            const modalImg = document.getElementById('lightbox-img');
+            modalImg.src = imageSrc;
+            modal.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            modal.style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
