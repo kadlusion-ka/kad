@@ -32,7 +32,7 @@
         }
         h1, h2, h3, .price-value, .price-title { font-family: 'Sora', 'Segoe UI', sans-serif; }
 
-        /* ---------- TOPO (mais baixo que antes) ---------- */
+        /* ---------- TOPO ---------- */
         header {
             background:
                 radial-gradient(500px 240px at 15% 20%, rgba(59,108,255,.55), transparent 70%),
@@ -51,7 +51,7 @@
         }
         header p { font-size: 1.05rem; color: #c9d4f5; }
 
-        /* ---------- LARGURA DO SITE (antes 1040px, agora 1280px) ---------- */
+        /* ---------- LARGURA DO SITE ---------- */
         .container {
             width: 100%;
             max-width: 1280px;
@@ -113,6 +113,28 @@
             font-size: .85rem;
         }
 
+        /* ---------- BOTÃO TESTE GRÁTIS 24H ---------- */
+        .btn-trial {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            padding: 10px 14px;
+            font-size: .9rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: transform .2s ease, background .2s ease, color .2s ease;
+        }
+        .btn-trial:hover {
+            transform: translateY(-2px);
+            background: var(--accent);
+            color: #fff;
+        }
+
         /* ---------- PREÇOS (3 planos em uma linha só) ---------- */
         .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
         .plan {
@@ -140,14 +162,14 @@
             transition: transform .2s ease, filter .2s ease;
         }
         .btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
-        .btn:focus-visible, .shots div:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-        .btn.off { background: #cdd3e6; color: #4a5272; pointer-events: none; } /* botão "Em breve" */
+        .btn:focus-visible, .btn-trial:focus-visible, .shots div:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+        .btn.off { background: #cdd3e6; color: #4a5272; pointer-events: none; }
 
         .book-price { display: flex; align-items: center; gap: 16px; }
         .book-price .price-value { margin: 0; font-size: 1.8rem; }
         .book-price .btn { padding: 11px 22px; margin: 0; }
 
-        /* ---------- PRINTS (lado a lado, pequenos) ---------- */
+        /* ---------- PRINTS ---------- */
         .shots {
             display: flex;
             gap: 10px;
@@ -168,7 +190,7 @@
         .shots img {
             width: 100%;
             aspect-ratio: 9 / 19;
-            object-fit: contain;   /* mostra a imagem inteira, sem cortar */
+            object-fit: contain;
             background: #0b1020;
             display: block;
         }
@@ -206,7 +228,7 @@
             header { padding: 36px 16px 76px; }
         }
         @media (max-width: 520px) {
-            .shots { overflow-x: auto; }               /* prints deslizam para o lado */
+            .shots { overflow-x: auto; }
             .shots div { flex: 0 0 42%; }
             .book-price { flex-direction: column; align-items: stretch; text-align: center; }
         }
@@ -225,8 +247,6 @@
     <div class="container">
 
         <!-- ===== PROJETO 1: COMPRAS COM VOZ ===== -->
-        <!-- Pasta: "compras com voz imagens" (icone.jpg, print1 a print3.jpg) -->
-        <!-- Se trocar a quantidade de prints, copie/apague um bloco <div onclick...> -->
         <div class="card">
             <div>
                 <div class="title-row">
@@ -240,6 +260,7 @@
                     <li>Confirmação de segurança contra cliques acidentais</li>
                     <li>Temas personalizados e calculadora rápida</li>
                 </ul>
+                <a href="LINK_DRIVE_COMPRAS_COM_VOZ" class="btn-trial" target="_blank">⬇ Baixar Teste Grátis (24h)</a>
                 <div class="plans">
                     <div class="plan">
                         <div class="price-title">Mensal</div>
@@ -266,7 +287,6 @@
         </div>
 
         <!-- ===== PROJETO 2: KAD GASTOS ===== -->
-        <!-- Pasta: "kad gastos imagens" (icone.jpg, print1 a print4.jpg) -->
         <div class="card gastos">
             <div>
                 <div class="title-row">
@@ -279,6 +299,7 @@
                     <li>Empréstimos e salário no mesmo painel</li>
                     <li>Lembretes e notificações de vencimento</li>
                 </ul>
+                <a href="LINK_DRIVE_KAD_GASTOS" class="btn-trial" target="_blank">⬇ Baixar Teste Grátis (24h)</a>
                 <div class="plans">
                     <div class="plan">
                         <div class="price-title">Mensal</div>
@@ -305,7 +326,6 @@
         </div>
 
         <!-- ===== PROJETO 3: KAD PLAYER ===== -->
-        <!-- Pasta: "kad player imagens" (icone.png, print1 a print4.jpg) -->
         <div class="card player">
             <div>
                 <div class="title-row">
@@ -319,6 +339,7 @@
                     <li>Troca de faixa pelos botões de volume</li>
                     <li>Controles de mídia na tela de bloqueio</li>
                 </ul>
+                <a href="LINK_DRIVE_KAD_PLAYER" class="btn-trial" target="_blank">⬇ Baixar Teste Grátis (24h)</a>
                 <div class="plans">
                     <div class="plan">
                         <div class="price-title">Mensal</div>
@@ -346,7 +367,6 @@
         </div>
 
         <!-- ===== PROJETO 4: LIVRO ===== -->
-        <!-- Pasta: "o codigo do silicio imagens" (print4.jpg é a capa, por isso vem primeiro) -->
         <div class="card book">
             <div>
                 <div class="title-row">
